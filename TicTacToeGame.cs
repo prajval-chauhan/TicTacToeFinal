@@ -66,5 +66,33 @@ namespace TicTacToeFinal
             Console.WriteLine("----------");
             Console.WriteLine(board[7] + " | " + board[8] + " | " + board[9]);
         }
+
+        /// <summary>
+        /// Allows the user to input moves into desired locations on the board
+        /// </summary>
+        /// <param name="board">The board.</param>
+        /// <param name="userInput">The user input.</param>
+        /// <returns></returns>
+        public char[] UserMove(char[] board, char userInput)
+        {
+            for (; ; )
+            {
+                Console.WriteLine("Choose the position where you'd like to place {0}", userInput);
+                int input = Convert.ToInt32(Console.ReadLine());
+                if (input > 0 && input <= 9 && board[input] ==' ')
+                {
+                    board[input] = userInput;
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("Invalid Move");
+                    Console.ReadKey();
+                    Console.Clear();
+                    DispBoard(board);
+                }
+            }
+            return board;
+        }
     }
 }

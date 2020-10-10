@@ -13,6 +13,10 @@ namespace TicTacToeFinal
             char computerInput = call.ComputerInput(userInput);
             Console.Clear();
             call.DispBoard(currentBoard);
+            currentBoard = call.UserMove(currentBoard, userInput);
+            Console.Clear();
+            call.DispBoard(currentBoard);
+            
         }
     }
 }
