@@ -11,6 +11,8 @@ namespace TicTacToeFinal
             char[] currentBoard = call.CreateBoard();
             char userInput = call.ZeroOrCross();
             char computerInput = call.ComputerInput(userInput);
+            Console.Clear();
+            call.DispBoard(currentBoard);
         }
     }
 }

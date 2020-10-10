@@ -53,5 +53,18 @@ namespace TicTacToeFinal
                 computerInput = 'X';
             return computerInput;
         }
+        /// <summary>
+        /// Displays the current board with user and computer moves.
+        /// </summary>
+        /// <param name="board">The board.</param>
+        public void DispBoard(char[] board)
+        {
+            Console.WriteLine("---------------- \nCurrent Board\n----------------\n");
+            Console.WriteLine(board[1] + " | " + board[2] + " | " + board[3]);
+            Console.WriteLine("----------");
+            Console.WriteLine(board[4] + " | " + board[5] + " | " + board[6]);
+            Console.WriteLine("----------");
+            Console.WriteLine(board[7] + " | " + board[8] + " | " + board[9]);
+        }
     }
 }
