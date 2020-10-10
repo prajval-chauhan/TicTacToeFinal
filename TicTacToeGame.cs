@@ -65,6 +65,7 @@ namespace TicTacToeFinal
             Console.WriteLine(board[4] + " | " + board[5] + " | " + board[6]);
             Console.WriteLine("----------");
             Console.WriteLine(board[7] + " | " + board[8] + " | " + board[9]);
+            Console.ReadKey();
         }
 
         /// <summary>
@@ -94,6 +95,12 @@ namespace TicTacToeFinal
             }
             return board;
         }
+        /// <summary>
+        /// Computer generates a random number and if the board is free at that position then the computer makes its move
+        /// </summary>
+        /// <param name="board">The board.</param>
+        /// <param name="computerInput">The computer input.</param>
+        /// <returns></returns>
         public char[] ComputerMove(char[] board, char computerInput)
         {
             Random randomNum = new Random();
@@ -109,6 +116,41 @@ namespace TicTacToeFinal
 
             }
             return board;
+        }
+        /// <summary>
+        /// The toss decides who goes first.
+        /// </summary>
+        /// <returns></returns>
+        public char Toss()
+        {
+            Random randomNum = new Random();
+            Console.WriteLine("Enter '1' for heads and '0' for Tails");
+            int input = Convert.ToInt32(Console.ReadLine());
+            for (; ; )
+            {
+                if (input == 1 || input == 0)
+                {
+                    int Toss = randomNum.Next(0, 1);
+                    if (Toss == input)
+                    {
+                        Console.WriteLine("You won the toss");
+                        Console.ReadKey();
+                        return 'W';
+                    }
+                    else
+                    {
+                        Console.WriteLine("Computer won the toss");
+                        Console.ReadKey();
+                        return 'L';
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Invalid Input");
+                    Console.ReadKey();
+                }
+            }
+            
         }
     }
 }
