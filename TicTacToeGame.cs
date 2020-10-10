@@ -94,5 +94,21 @@ namespace TicTacToeFinal
             }
             return board;
         }
+        public char[] ComputerMove(char[] board, char computerInput)
+        {
+            Random randomNum = new Random();
+            int input;
+            for (; ; )
+            {
+                input = randomNum.Next(1, 10);
+                if (input > 0 && input <= 9 && board[input] == ' ')
+                {
+                    board[input] = computerInput;
+                    break;
+                }
+
+            }
+            return board;
+        }
     }
 }
