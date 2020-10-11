@@ -94,6 +94,8 @@ namespace TicTacToeFinal
                     DispBoard(board);
                 }
             }
+            Console.WriteLine("Current Board: \n");
+            DispBoard(board);
             return board;
         }
         /// <summary>
@@ -168,8 +170,6 @@ namespace TicTacToeFinal
                     boardCopy[i] = ' ';
                 }
             }
-            Console.WriteLine("Computer Check");
-            DispBoard(board);
             return board;
         }
         /// <summary>
@@ -199,8 +199,6 @@ namespace TicTacToeFinal
                     boardCopy[i] = ' ';
                 }
             }
-            Console.WriteLine("Prevent Victory status");
-            DispBoard(board);
             return board;
         }
         /// <summary>
@@ -224,8 +222,6 @@ namespace TicTacToeFinal
                 if (turn == 1)
                     break;
             }
-            Console.WriteLine("Take the corner");
-            DispBoard(board);
             return board;
         }
         /// <summary>

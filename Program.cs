@@ -23,7 +23,7 @@ namespace TicTacToeFinal
                 case 'W':
                     for (; ; )
                     {
-                        Player(currentBoard, userInput);
+                        currentBoard = Player(currentBoard, userInput);
                         flag = call.resultCheck(currentBoard);
                         noOfTurns += 1;
                         if (flag == true)
@@ -36,7 +36,7 @@ namespace TicTacToeFinal
                             Console.WriteLine("Match Drawn");
                             break;
                         }
-                        Computer(currentBoard, computerInput, userInput);
+                        currentBoard = Computer(currentBoard, computerInput, userInput);
                         flag = call.resultCheck(currentBoard);
                         noOfTurns += 1;
                         if (flag == true)
@@ -55,7 +55,7 @@ namespace TicTacToeFinal
                 case 'L':
                     for (; ; )
                     {
-                        Computer(currentBoard, computerInput, userInput);
+                        currentBoard = Computer(currentBoard, computerInput, userInput);
                         flag = call.resultCheck(currentBoard);
                         noOfTurns += 1;
                         if (flag == true)
@@ -68,7 +68,7 @@ namespace TicTacToeFinal
                             Console.WriteLine("Match Drawn");
                             break;
                         }
-                        Player(currentBoard, userInput);
+                        currentBoard = Player(currentBoard, userInput);
                         flag = call.resultCheck(currentBoard);
                         noOfTurns += 1;
                         if (flag == true)
@@ -95,10 +95,14 @@ namespace TicTacToeFinal
 
         public static char[] Computer(char[] board, char computerInput, char userInput)
         {
-            char[] boardCopy = board;
+            char[] boardCopy = new char[10];
+            for (int i =0; i<board.Length; i++)
+            {
+                boardCopy[i] = board[i];
+            }
             TicTacToeGame call = new TicTacToeGame();
             boardCopy = call.ComputerCheck(boardCopy, computerInput);
-            if (boardCopy == board)
+            if ((CompareBoard(board, boardCopy) == true))
             {
                 boardCopy = call.PreventVictory(boardCopy, userInput);
                 if (CompareBoard(board, boardCopy) == true)
@@ -111,6 +115,8 @@ namespace TicTacToeFinal
                 }
             }
             board = boardCopy;
+            Console.WriteLine("Current Board: \n");
+            call.DispBoard(board);
             return board;
         }
 
