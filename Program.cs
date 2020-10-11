@@ -41,7 +41,7 @@ namespace TicTacToeFinal
                         noOfTurns += 1;
                         if (flag == true)
                         {
-                            Console.WriteLine("You Won");
+                            Console.WriteLine("Computer Won");
                             break;
                         }
                         if (noOfTurns == 9)
@@ -60,7 +60,7 @@ namespace TicTacToeFinal
                         noOfTurns += 1;
                         if (flag == true)
                         {
-                            Console.WriteLine("You Won");
+                            Console.WriteLine("Computer Won");
                             break;
                         }
                         if (noOfTurns == 9)
