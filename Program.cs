@@ -17,7 +17,6 @@ namespace TicTacToeFinal
                 int noOfTurns = 0;
                 bool flag = false;
                 char[] currentBoard = call.CreateBoard();
-
                 switch (toss)
                 {
                     case 'W':
@@ -91,7 +90,6 @@ namespace TicTacToeFinal
                    char choice = Convert.ToChar(Console.ReadLine().ToLower());
                 if (choice == 'n')
                     break;
-
             }
         }
         public static char[] Player(char[] board, char userInput)
@@ -103,7 +101,6 @@ namespace TicTacToeFinal
             Console.Clear();
             return board;
         }
-
         public static char[] Computer(char[] board, char computerInput, char userInput)
         {
             char[] boardCopy = new char[10];
@@ -128,7 +125,6 @@ namespace TicTacToeFinal
             board = boardCopy;
             return board;
         }
-
         public static bool CompareBoard( char[] boardCopy, char[] board)
         {
             return boardCopy.SequenceEqual(board);

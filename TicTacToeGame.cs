@@ -249,8 +249,6 @@ namespace TicTacToeFinal
             Console.WriteLine("Computer Move");
             DispBoard(board);
             return board;
-        }
-
-        
+        }   
     }
 }
