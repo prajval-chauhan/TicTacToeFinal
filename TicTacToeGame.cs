@@ -237,7 +237,12 @@ namespace TicTacToeFinal
             for (; ; )
             {
                 input = randomNum.Next(1, 10);
-                if (input > 0 && input <= 9 && board[input] == ' ')
+                if (board[5] == ' ')
+                {
+                    board[5] = computerInput;
+                    break;
+                }
+               else if(input > 0 && input <= 9 && board[input] == ' ')
                 {
                     board[input] = computerInput;
                     break;
