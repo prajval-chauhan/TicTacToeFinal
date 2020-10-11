@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 
 namespace TicTacToeFinal
@@ -80,7 +81,7 @@ namespace TicTacToeFinal
             {
                 Console.WriteLine("Choose the position where you'd like to place {0}", userInput);
                 int input = Convert.ToInt32(Console.ReadLine());
-                if (input > 0 && input <= 9 && board[input] ==' ')
+                if (input > 0 && input <= 9 && board[input] == ' ')
                 {
                     board[input] = userInput;
                     break;
@@ -104,7 +105,7 @@ namespace TicTacToeFinal
         public char[] ComputerMove(char[] board, char computerInput)
         {
             Random randomNum = new Random();
-            int input;
+            int input = 1;
             for (; ; )
             {
                 input = randomNum.Next(1, 10);
@@ -113,7 +114,6 @@ namespace TicTacToeFinal
                     board[input] = computerInput;
                     break;
                 }
-
             }
             return board;
         }
@@ -130,7 +130,7 @@ namespace TicTacToeFinal
             {
                 if (input == 1 || input == 0)
                 {
-                    int Toss = randomNum.Next(0, 1);
+                    int Toss = randomNum.Next(0, 2);
                     if (Toss == input)
                     {
                         Console.WriteLine("You won the toss");
@@ -149,7 +149,7 @@ namespace TicTacToeFinal
                     Console.WriteLine("Invalid Input");
                     Console.ReadKey();
                 }
-            }  
+            }
         }
         /// <summary>
         /// Results the check.
@@ -166,6 +166,30 @@ namespace TicTacToeFinal
                 )
                 result = true;
             return result;
+        }
+        /// <summary>
+        /// Computer checks if there is a move which can win it the match
+        /// </summary>
+        /// <param name="board">The board.</param>
+        /// <param name="compueterInput">The compueter input.</param>
+        /// <returns></returns>
+        public char[] ComputerCheck(char[] board, char compueterInput)
+        {
+            char[] boardCopy = board;
+            for (int i = 0; i <boardCopy.Length; i++)
+            {
+                if (boardCopy[i] == ' ')
+                {
+                    boardCopy[i] = compueterInput;
+                    if (resultCheck(boardCopy) == true)
+                    {
+                        board[i] = boardCopy[i];
+                        break;
+                    }
+                    boardCopy[i] = ' ';
+                }
+            }
+            return board;
         }
     }
 }

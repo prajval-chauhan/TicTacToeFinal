@@ -17,7 +17,7 @@ namespace TicTacToeFinal
 
             char[] currentBoard = call.CreateBoard();
 
-            switch(toss)
+            switch (toss)
             {
                 case 'W':
                     for (; ; )
@@ -25,7 +25,7 @@ namespace TicTacToeFinal
                         currentBoard = call.UserMove(currentBoard, userInput);
                         call.DispBoard(currentBoard);
                         noOfTurns = noOfTurns + 1;
-                        if(noOfTurns == 9)
+                        if (noOfTurns == 9)
                         {
                             Console.WriteLine("Match Drawn");
                             break;
@@ -36,7 +36,9 @@ namespace TicTacToeFinal
                             Console.WriteLine("You Won");
                             break;
                         }
-                        currentBoard = call.ComputerMove(currentBoard, computerInput);
+                        currentBoard = call.ComputerCheck(currentBoard, computerInput);
+                        if (call.resultCheck(currentBoard) == false)
+                            currentBoard = call.ComputerMove(currentBoard, computerInput);
                         call.DispBoard(currentBoard);
                         noOfTurns = noOfTurns + 1;
                         if (noOfTurns == 9)
@@ -57,7 +59,9 @@ namespace TicTacToeFinal
                 case 'L':
                     for (; ; )
                     {
-                        currentBoard = call.ComputerMove(currentBoard, computerInput);
+                        currentBoard = call.ComputerCheck(currentBoard, computerInput);
+                        if (call.resultCheck(currentBoard) == false)
+                            currentBoard = call.ComputerMove(currentBoard, computerInput);
                         call.DispBoard(currentBoard);
                         noOfTurns = noOfTurns + 1;
                         if (noOfTurns == 9)
@@ -90,6 +94,22 @@ namespace TicTacToeFinal
                     break;
 
             }
+
         }
+/*        public char[] ComputerTurn(char [] currentBoard, char computerInput)
+        {
+            TicTacToeGame call = new TicTacToeGame();
+            currentBoard = call.ComputerMove(currentBoard, computerInput);
+            call.DispBoard(currentBoard);
+            return (currentBoard);
+        }
+
+    public char[] UserTurn(char[] currentBoard, char userInput)
+        {
+            TicTacToeGame call = new TicTacToeGame();
+            currentBoard = call.UserMove(currentBoard, userInput);
+            call.DispBoard(currentBoard);
+            return (currentBoard);
+        }*/
     }
 }
