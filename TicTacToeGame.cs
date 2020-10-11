@@ -97,27 +97,6 @@ namespace TicTacToeFinal
             return board;
         }
         /// <summary>
-        /// Computer generates a random number and if the board is free at that position then the computer makes its move
-        /// </summary>
-        /// <param name="board">The board.</param>
-        /// <param name="computerInput">The computer input.</param>
-        /// <returns></returns>
-        public char[] ComputerMove(char[] board, char computerInput)
-        {
-            Random randomNum = new Random();
-            int input = 1;
-            for (; ; )
-            {
-                input = randomNum.Next(1, 10);
-                if (input > 0 && input <= 9 && board[input] == ' ')
-                {
-                    board[input] = computerInput;
-                    break;
-                }
-            }
-            return board;
-        }
-        /// <summary>
         /// The toss decides who goes first.
         /// </summary>
         /// <returns></returns>
@@ -176,7 +155,7 @@ namespace TicTacToeFinal
         public char[] ComputerCheck(char[] board, char compueterInput)
         {
             char[] boardCopy = board;
-            for (int i = 0; i <boardCopy.Length; i++)
+            for (int i = 1; i <boardCopy.Length; i++)
             {
                 if (boardCopy[i] == ' ')
                 {
@@ -189,8 +168,16 @@ namespace TicTacToeFinal
                     boardCopy[i] = ' ';
                 }
             }
+            Console.WriteLine("Computer Check");
+            DispBoard(board);
             return board;
         }
+        /// <summary>
+        /// Prevents the victory.
+        /// </summary>
+        /// <param name="board">The board.</param>
+        /// <param name="userInput">The user input.</param>
+        /// <returns></returns>
         public char[] PreventVictory(char[] board, char userInput)
         {
             char[] boardCopy = board;
@@ -199,7 +186,7 @@ namespace TicTacToeFinal
                 computerInput = 'O';
             else
                 computerInput = 'X';
-            for (int i = 0; i < boardCopy.Length; i++)
+            for (int i = 1; i < boardCopy.Length; i++)
             {
                 if (boardCopy[i] == ' ')
                 {
@@ -212,7 +199,59 @@ namespace TicTacToeFinal
                     boardCopy[i] = ' ';
                 }
             }
+            Console.WriteLine("Prevent Victory status");
+            DispBoard(board);
             return board;
         }
+        /// <summary>
+        /// Takes the corner.
+        /// </summary>
+        /// <param name="board">The board.</param>
+        /// <param name="computerInput">The computer input.</param>
+        /// <returns></returns>
+        public char[] TakeTheCorner(char[] board, char computerInput)
+        {
+            char[] boardCopy = board;
+            int turn = 0;
+            for (int i = 1; i<boardCopy.Length;i++)
+            {
+                if ((i == 1 && boardCopy[i] == ' ' )|| (i == 3 && boardCopy[i] == ' ') 
+                    || (i == 7 && boardCopy[i] == ' ') || (i == 9 && boardCopy[i] == ' '))
+                {
+                    board[i] = computerInput;
+                    turn = turn + 1;
+                }
+                if (turn == 1)
+                    break;
+            }
+            Console.WriteLine("Take the corner");
+            DispBoard(board);
+            return board;
+        }
+        /// <summary>
+        /// Computer generates a random number and if the board is free at that position then the computer makes its move
+        /// </summary>
+        /// <param name="board">The board.</param>
+        /// <param name="computerInput">The computer input.</param>
+        /// <returns></returns>
+        public char[] ComputerMove(char[] board, char computerInput)
+        {
+            Random randomNum = new Random();
+            int input = 1;
+            for (; ; )
+            {
+                input = randomNum.Next(1, 10);
+                if (input > 0 && input <= 9 && board[input] == ' ')
+                {
+                    board[input] = computerInput;
+                    break;
+                }
+            }
+            Console.WriteLine("Computer Move");
+            DispBoard(board);
+            return board;
+        }
+
+        
     }
 }

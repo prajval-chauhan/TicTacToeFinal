@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace TicTacToeFinal
 {
@@ -6,9 +7,9 @@ namespace TicTacToeFinal
     {
         static void Main(string[] args)
         {
-            bool result = false;
+            TicTacToeGame call = new TicTacToeGame();
+            bool flag = false;
             int noOfTurns = 0;
-            TicTacToeGame call = new TicTacToeGame(); // this object call is used to call the functions of class TicTacToeGmae
             Console.WriteLine("Welcome to the Tic Tac Toe Program");
             char userInput = call.ZeroOrCross();
             char computerInput = call.ComputerInput(userInput);
@@ -22,98 +23,100 @@ namespace TicTacToeFinal
                 case 'W':
                     for (; ; )
                     {
-                        currentBoard = call.UserMove(currentBoard, userInput);
-                        call.DispBoard(currentBoard);
-                        noOfTurns = noOfTurns + 1;
-                        if (noOfTurns == 9)
-                        {
-                            Console.WriteLine("Match Drawn");
-                            break;
-                        }
-                        result = call.resultCheck(currentBoard);
-                        if (result == true)
+                        Player(currentBoard, userInput);
+                        flag = call.resultCheck(currentBoard);
+                        noOfTurns += 1;
+                        if (flag == true)
                         {
                             Console.WriteLine("You Won");
                             break;
                         }
-                        currentBoard = call.ComputerCheck(currentBoard, computerInput);
-                        if (call.resultCheck(currentBoard) == false)
-                            currentBoard = call.PreventVictory(currentBoard, userInput);
-                        if (call.resultCheck(currentBoard) == false)
-                            currentBoard = call.ComputerMove(currentBoard, computerInput);
-                        call.DispBoard(currentBoard);
-                        noOfTurns = noOfTurns + 1;
                         if (noOfTurns == 9)
                         {
                             Console.WriteLine("Match Drawn");
                             break;
                         }
-                        result = call.resultCheck(currentBoard);
-                        if (result == true)
+                        Computer(currentBoard, computerInput, userInput);
+                        flag = call.resultCheck(currentBoard);
+                        noOfTurns += 1;
+                        if (flag == true)
                         {
-                            Console.WriteLine("Take the L");
+                            Console.WriteLine("You Won");
                             break;
                         }
-                        result = call.resultCheck(currentBoard);
-                        Console.Clear();
+                        if (noOfTurns == 9)
+                        {
+                            Console.WriteLine("Match Drawn");
+                            break;
+                        }
                     }
                     break;
+
                 case 'L':
                     for (; ; )
                     {
-                        currentBoard = call.ComputerCheck(currentBoard, computerInput);
-                        if (call.resultCheck(currentBoard) == false)
-                            currentBoard = call.PreventVictory(currentBoard, userInput);
-                        if (call.resultCheck(currentBoard) == false)
-                            currentBoard = call.ComputerMove(currentBoard, computerInput);
-                        call.DispBoard(currentBoard);
-                        noOfTurns = noOfTurns + 1;
-                        if (noOfTurns == 9)
-                        {
-                            Console.WriteLine("Match Drawn");
-                            break;
-                        }
-                        result = call.resultCheck(currentBoard);
-                        if (result == true)
-                        {
-                            Console.WriteLine("Take the L");
-                            break;
-                        }
-                        currentBoard = call.UserMove(currentBoard, userInput);
-                        call.DispBoard(currentBoard);
-                        noOfTurns = noOfTurns + 1;
-                        if (noOfTurns == 9)
-                        {
-                            Console.WriteLine("Match Drawn");
-                            break;
-                        }
-                        result = call.resultCheck(currentBoard);
-                        if (result == true)
+                        Computer(currentBoard, computerInput, userInput);
+                        flag = call.resultCheck(currentBoard);
+                        noOfTurns += 1;
+                        if (flag == true)
                         {
                             Console.WriteLine("You Won");
                             break;
                         }
-                        Console.Clear();
+                        if (noOfTurns == 9)
+                        {
+                            Console.WriteLine("Match Drawn");
+                            break;
+                        }
+                        Player(currentBoard, userInput);
+                        flag = call.resultCheck(currentBoard);
+                        noOfTurns += 1;
+                        if (flag == true)
+                        {
+                            Console.WriteLine("You Won");
+                            break;
+                        }
+                        if (noOfTurns == 9)
+                        {
+                            Console.WriteLine("Match Drawn");
+                            break;
+                        }
                     }
                     break;
 
             }
-
         }
-/*        public char[] ComputerTurn(char [] currentBoard, char computerInput)
+        public static char[] Player(char[] board, char userInput)
         {
             TicTacToeGame call = new TicTacToeGame();
-            currentBoard = call.ComputerMove(currentBoard, computerInput);
-            call.DispBoard(currentBoard);
-            return (currentBoard);
+            board = call.UserMove(board, userInput);
+            return board;
         }
 
-    public char[] UserTurn(char[] currentBoard, char userInput)
+        public static char[] Computer(char[] board, char computerInput, char userInput)
         {
+            char[] boardCopy = board;
             TicTacToeGame call = new TicTacToeGame();
-            currentBoard = call.UserMove(currentBoard, userInput);
-            call.DispBoard(currentBoard);
-            return (currentBoard);
-        }*/
+            boardCopy = call.ComputerCheck(boardCopy, computerInput);
+            if (boardCopy == board)
+            {
+                boardCopy = call.PreventVictory(boardCopy, userInput);
+                if (CompareBoard(board, boardCopy) == true)
+                {
+                    boardCopy = call.TakeTheCorner(boardCopy, computerInput);
+                    if (CompareBoard(board, boardCopy) == true)
+                    {
+                        boardCopy = call.ComputerMove(boardCopy, computerInput);
+                    }
+                }
+            }
+            board = boardCopy;
+            return board;
+        }
+
+        public static bool CompareBoard( char[] boardCopy, char[] board)
+        {
+            return boardCopy.SequenceEqual(board);
+        }
     }
 }
