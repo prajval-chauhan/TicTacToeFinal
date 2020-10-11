@@ -38,6 +38,8 @@ namespace TicTacToeFinal
                         }
                         currentBoard = call.ComputerCheck(currentBoard, computerInput);
                         if (call.resultCheck(currentBoard) == false)
+                            currentBoard = call.PreventVictory(currentBoard, userInput);
+                        if (call.resultCheck(currentBoard) == false)
                             currentBoard = call.ComputerMove(currentBoard, computerInput);
                         call.DispBoard(currentBoard);
                         noOfTurns = noOfTurns + 1;
@@ -60,6 +62,8 @@ namespace TicTacToeFinal
                     for (; ; )
                     {
                         currentBoard = call.ComputerCheck(currentBoard, computerInput);
+                        if (call.resultCheck(currentBoard) == false)
+                            currentBoard = call.PreventVictory(currentBoard, userInput);
                         if (call.resultCheck(currentBoard) == false)
                             currentBoard = call.ComputerMove(currentBoard, computerInput);
                         call.DispBoard(currentBoard);

@@ -191,5 +191,28 @@ namespace TicTacToeFinal
             }
             return board;
         }
+        public char[] PreventVictory(char[] board, char userInput)
+        {
+            char[] boardCopy = board;
+            char computerInput;
+            if (userInput == 'X')
+                computerInput = 'O';
+            else
+                computerInput = 'X';
+            for (int i = 0; i < boardCopy.Length; i++)
+            {
+                if (boardCopy[i] == ' ')
+                {
+                    boardCopy[i] = userInput;
+                    if (resultCheck(boardCopy) == true)
+                    {
+                        board[i] = computerInput;
+                        break;
+                    }
+                    boardCopy[i] = ' ';
+                }
+            }
+            return board;
+        }
     }
 }
