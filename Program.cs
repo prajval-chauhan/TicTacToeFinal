@@ -8,87 +8,99 @@ namespace TicTacToeFinal
         static void Main(string[] args)
         {
             TicTacToeGame call = new TicTacToeGame();
-            bool flag = false;
-            int noOfTurns = 0;
-            Console.WriteLine("Welcome to the Tic Tac Toe Program");
+            Console.WriteLine("Welcome to the Tic Tac Toe Game");
             char userInput = call.ZeroOrCross();
             char computerInput = call.ComputerInput(userInput);
-
-            char toss = call.Toss();
-
-            char[] currentBoard = call.CreateBoard();
-
-            switch (toss)
+            for (; ; )
             {
-                case 'W':
-                    for (; ; )
-                    {
-                        currentBoard = Player(currentBoard, userInput);
-                        flag = call.resultCheck(currentBoard);
-                        noOfTurns += 1;
-                        if (flag == true)
+                char toss = call.Toss();
+                int noOfTurns = 0;
+                bool flag = false;
+                char[] currentBoard = call.CreateBoard();
+
+                switch (toss)
+                {
+                    case 'W':
+                        for (; ; )
                         {
-                            Console.WriteLine("You Won");
-                            break;
+                            
+                            currentBoard = Player(currentBoard, userInput);
+                            flag = call.resultCheck(currentBoard);
+                            noOfTurns += 1;
+                            if (flag == true)
+                            {
+                                Console.WriteLine("You Won");
+                                break;
+                            }
+                            if (noOfTurns == 9)
+                            {
+                                Console.WriteLine("Match Drawn");
+                                break;
+                            }
+                            currentBoard = Computer(currentBoard, computerInput, userInput);
+                            flag = call.resultCheck(currentBoard);
+                            noOfTurns += 1;
+                            if (flag == true)
+                            {
+                                Console.WriteLine("Take the L");
+                                break;
+                            }
+                            if (noOfTurns == 9)
+                            {
+                                Console.WriteLine("Match Drawn");
+                                break;
+                            }
                         }
-                        if (noOfTurns == 9)
+                        break;
+
+                    case 'L':
+                        for (; ; )
                         {
-                            Console.WriteLine("Match Drawn");
-                            break;
+                            currentBoard = Computer(currentBoard, computerInput, userInput);
+                            flag = call.resultCheck(currentBoard);
+                            noOfTurns += 1;
+                            if (flag == true)
+                            {
+                                Console.WriteLine("Take the L");
+                                break;
+                            }
+                            if (noOfTurns == 9)
+                            {
+                                Console.WriteLine("Match Drawn");
+                                break;
+                            }
+                            currentBoard = Player(currentBoard, userInput);
+                            flag = call.resultCheck(currentBoard);
+                            noOfTurns += 1;
+                            if (flag == true)
+                            {
+                                Console.WriteLine("You Won");
+                                break;
+                            }
+                            if (noOfTurns == 9)
+                            {
+                                Console.WriteLine("Match Drawn");
+                                break;
+                            }
                         }
-                        currentBoard = Computer(currentBoard, computerInput, userInput);
-                        flag = call.resultCheck(currentBoard);
-                        noOfTurns += 1;
-                        if (flag == true)
-                        {
-                            Console.WriteLine("Computer Won");
-                            break;
-                        }
-                        if (noOfTurns == 9)
-                        {
-                            Console.WriteLine("Match Drawn");
-                            break;
-                        }
-                    }
+                        break;
+                }
+                Console.ReadLine();
+                Console.Clear();
+                Console.WriteLine("Would You like to play another game Y/N :");
+                   char choice = Convert.ToChar(Console.ReadLine().ToLower());
+                if (choice == 'n')
                     break;
 
-                case 'L':
-                    for (; ; )
-                    {
-                        currentBoard = Computer(currentBoard, computerInput, userInput);
-                        flag = call.resultCheck(currentBoard);
-                        noOfTurns += 1;
-                        if (flag == true)
-                        {
-                            Console.WriteLine("Computer Won");
-                            break;
-                        }
-                        if (noOfTurns == 9)
-                        {
-                            Console.WriteLine("Match Drawn");
-                            break;
-                        }
-                        currentBoard = Player(currentBoard, userInput);
-                        flag = call.resultCheck(currentBoard);
-                        noOfTurns += 1;
-                        if (flag == true)
-                        {
-                            Console.WriteLine("You Won");
-                            break;
-                        }
-                        if (noOfTurns == 9)
-                        {
-                            Console.WriteLine("Match Drawn");
-                            break;
-                        }
-                    }
-                    break;
             }
         }
         public static char[] Player(char[] board, char userInput)
         {
             TicTacToeGame call = new TicTacToeGame();
+            Console.Clear();
+            call.DispBoard(board);
             board = call.UserMove(board, userInput);
+            Console.Clear();
             return board;
         }
 
@@ -114,8 +126,6 @@ namespace TicTacToeFinal
                 }
             }
             board = boardCopy;
-            Console.WriteLine("Current Board: \n");
-            call.DispBoard(board);
             return board;
         }
 

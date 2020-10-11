@@ -94,8 +94,6 @@ namespace TicTacToeFinal
                     DispBoard(board);
                 }
             }
-            Console.WriteLine("Current Board: \n");
-            DispBoard(board);
             return board;
         }
         /// <summary>
