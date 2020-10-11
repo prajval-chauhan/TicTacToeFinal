@@ -83,7 +83,6 @@ namespace TicTacToeFinal
                         }
                     }
                     break;
-
             }
         }
         public static char[] Player(char[] board, char userInput)
