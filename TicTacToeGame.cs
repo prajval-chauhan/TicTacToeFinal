@@ -149,8 +149,23 @@ namespace TicTacToeFinal
                     Console.WriteLine("Invalid Input");
                     Console.ReadKey();
                 }
-            }
-            
+            }  
+        }
+        /// <summary>
+        /// Results the check.
+        /// </summary>
+        /// <param name="board">The board.</param>
+        /// <returns></returns>
+        public bool resultCheck(char[] board)
+        {
+            bool result = false;
+            if ((board[1] == board[2] && board[2] == board[3] && board[1] != ' ') || (board[4] == board[5] && board[5] == board[6] && board[6] != ' ')
+                || (board[7] == board[8] && board[8] == board[9] && board[7] != ' ') || (board[1] == board[4] && board[4] == board[7] && board[7] != ' ')
+                || (board[2] == board[5] && board[5] == board[8] && board[8] != ' ') || (board[3] == board[6] && board[6] == board[9] && board[9] != ' ')
+                || (board[1] == board[5] && board[5] == board[9] && board[9] != ' ') || (board[3] == board[5] && board[5] == board[7] && board[7] != ' ')
+                )
+                result = true;
+            return result;
         }
     }
 }
